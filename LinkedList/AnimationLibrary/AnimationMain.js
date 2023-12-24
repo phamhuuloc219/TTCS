@@ -149,7 +149,7 @@ function animWaiting()
 	{
 		stepBackButton.disabled = false;
 	}
-	objectManager.statusReport.setText("Animation Paused");
+	objectManager.statusReport.setText("");
 	objectManager.statusReport.setForegroundColor("#FF0000");
 }
 
@@ -159,7 +159,7 @@ function animStarted()
 	skipBackButton.disabled = false;
 	stepForwardButton.disabled = true;
 	stepBackButton.disabled = true;
-	objectManager.statusReport.setText("Animation Running");
+	objectManager.statusReport.setText("");
 	objectManager.statusReport.setForegroundColor("#009900");
 }
 
@@ -171,7 +171,7 @@ function animEnded()
 	{
 		stepBackButton.disabled = false;		
 	}
-	objectManager.statusReport.setText("Animation Completed");
+	objectManager.statusReport.setText("");
 	objectManager.statusReport.setForegroundColor("#000000");
 }
 
@@ -358,7 +358,7 @@ function initCanvas()
 	
 //	tableEntry = document.createElement("div");
 //        tableEntry.setAttribute("class", "btn-ctrl-group btn-ctrl-label");
-	txtNode = document.createTextNode("       h:"); 
+	txtNode = document.createTextNode("h:"); 
 	groupWidthHeightEntry.appendChild(txtNode);
 //	controlBar.appendChild(tableEntry);
 	

@@ -73,7 +73,7 @@ QueueLL.prototype.init = function(am, w, h)
 	this.addControls();
 	this.nextIndex = 0;
 	this.commands = [];
-	this.tail_pos_y = h - LINKED_LIST_ELEM_HEIGHT;
+	this.tail_pos_y = h - 100  - LINKED_LIST_ELEM_HEIGHT;
 	this.tail_label_y = this.tail_pos_y;
 	this.setup();
 	this.initialIndex = this.nextIndex;
@@ -97,11 +97,6 @@ QueueLL.prototype.addControls =  function()
 	this.dequeueButton = addControlToAlgorithmBar("Button", "Dequeue");
 	this.dequeueButton.onclick = this.dequeueCallback.bind(this);
 	this.controls.push(this.dequeueButton);
-	
-	this.clearButton = addControlToAlgorithmBar("Button", "Clear Queue");
-	this.clearButton.onclick = this.clearCallback.bind(this);
-	this.controls.push(this.clearButton);
-	
 }
 
 QueueLL.prototype.enableUI = function(event)
@@ -334,18 +329,18 @@ QueueLL.prototype.dequeue = function(ignored)
 
 
 
-QueueLL.prototype.clearAll = function()
-{
-	this.commands = new Array();
-	for (var i = 0; i < this.top; i++)
-	{
-		this.cmd("Delete", this.linkedListElemID[i]);
-	}
-	this.top = 0;
-	this.cmd("SetNull", this.headID, 1);
-	return this.commands;
+// QueueLL.prototype.clearAll = function()
+// {
+// 	this.commands = new Array();
+// 	for (var i = 0; i < this.top; i++)
+// 	{
+// 		this.cmd("Delete", this.linkedListElemID[i]);
+// 	}
+// 	this.top = 0;
+// 	this.cmd("SetNull", this.headID, 1);
+// 	return this.commands;
 	
-}
+// }
 
 
 var currentAlg;

@@ -32,7 +32,7 @@ body {
 
 .VisualizationMainPage #algoControlSection
 {
-	background: #DDEEDD; 
+	background: #c3f5c3; 
 	color:#000000; 
 
 }
@@ -40,7 +40,7 @@ body {
 
 .VisualizationMainPage #generalAnimationControlSection
 {
-	background: #DDEEDD; 
+	background: #ffffff; 
 	color:#000000; 
 
 }
@@ -111,6 +111,13 @@ img {
     margin-right: 1px;
     margin-left: 2px;
     padding: 3px;
+}
+.trick{
+	position: relative;
+	top:60px;
+	background-color: #ffffff;
+	height: 250px;
+	width: fullscreen;
 }
 .top-btn-group input[type=checkbox]{
     margin-top: 4px;
