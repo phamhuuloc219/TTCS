@@ -1,31 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
-
-// Global timer used for doing animation callbacks.
-//  TODO:  Make this an instance variable of Animation Manager.
 var timer;
 var swapped = false;
 
@@ -52,7 +24,7 @@ function swapControlDiv()
 }
 
 
-// Utility funciton to read a cookie
+// read a cookie
 function getCookie(cookieName)
 {
 	var i, x, y;
@@ -69,7 +41,7 @@ function getCookie(cookieName)
 	}
 }
 
-// Utility funciton to write a cookie
+// write a cookie
 function setCookie(cookieName,value,expireDays)
 {
 	var exdate=new Date();
@@ -186,8 +158,7 @@ function anumUndoUnavailable()
 
 function timeout()
 {
-	// We need to set the timeout *first*, otherwise if we
-	// try to clear it later, we get behavior we don't want ...
+	// set the timeout *first*
     timer = setTimeout('timeout()', 30); 
 	animationManager.update();
 	objectManager.draw();	
@@ -252,7 +223,7 @@ function addControl(type, name, location) {
 	
     var controlBar = document.getElementById(tableEntry);
 	
-    //Append the element in page (in span).
+    //Nối các element trong trang.
     controlBar.appendChild(element);
 	return element;
  
@@ -278,7 +249,7 @@ function addControlToAnimationBar(type,name,containerType, tableEntry)
 	
     var controlBar = document.getElementById("GeneralAnimationControls");
 	
-    //Append the element in page (in span).
+    //Nối các element trong trang.
     controlBar.appendChild(tableEntry);
 	return element;
 	
@@ -292,15 +263,15 @@ function initCanvas()
 	objectManager = new ObjectManager();
 	animationManager = new AnimationManager(objectManager);
 	
-	skipBackButton = addControlToAnimationBar("Button", "Skip Back");
+	skipBackButton = addControlToAnimationBar("Button", "");
 	skipBackButton.onclick = animationManager.skipBack.bind(animationManager);
-	stepBackButton = addControlToAnimationBar("Button", "Step Back");
+	stepBackButton = addControlToAnimationBar("Button", "");
 	stepBackButton.onclick = animationManager.stepBack.bind(animationManager);
-	playPauseBackButton = addControlToAnimationBar("Button", "Pause");
+	playPauseBackButton = addControlToAnimationBar("Button", "");
 	playPauseBackButton.onclick = doPlayPause ;
-	stepForwardButton = addControlToAnimationBar("Button", "Step Forward");
+	stepForwardButton = addControlToAnimationBar("Button", "");
 	stepForwardButton.onclick = animationManager.step.bind(animationManager) ;
-	skipForwardButton = addControlToAnimationBar("Button", "Skip Forward");
+	skipForwardButton = addControlToAnimationBar("Button", "");
 	skipForwardButton.onclick = animationManager.skipForward.bind(animationManager);
 	
 	
@@ -346,56 +317,28 @@ function initCanvas()
         
         groupWidthHeightEntry.setAttribute("class", "btn-ctrl-group");
         groupWidthHeightEntry.setAttribute("id", "GroupWidthHeight");
-	txtNode = document.createTextNode(" w:"); 
-	groupWidthHeightEntry.appendChild(txtNode);
-//	controlBar.appendChild(tableEntry);
 
-
-	widthEntry = addControlToAnimationBar("Text", canvas.width, "input", groupWidthHeightEntry);
-	widthEntry.size = 4;
-	widthEntry.onkeydown = this.returnSubmit(widthEntry, animationManager.changeSize.bind(animationManager), 4, true);
-
-	
-//	tableEntry = document.createElement("div");
-//        tableEntry.setAttribute("class", "btn-ctrl-group btn-ctrl-label");
-	txtNode = document.createTextNode("h:"); 
-	groupWidthHeightEntry.appendChild(txtNode);
-//	controlBar.appendChild(tableEntry);
-	
-	heightEntry = addControlToAnimationBar("Text", canvas.height,"input", groupWidthHeightEntry);
-	heightEntry.onkeydown = this.returnSubmit(heightEntry, animationManager.changeSize.bind(animationManager), 4, true);
-
-//	heightEntry.size = 4;
-	sizeButton = addControlToAnimationBar("Button", "Change Canvas Size");
+	sizeButton = addControlToAnimationBar("Button", "");
 	
 	sizeButton.onclick = animationManager.changeSize.bind(animationManager) ;
 	
 
-        swapButton = addControlToAnimationBar("Button", "Move Controls");
+        swapButton = addControlToAnimationBar("Button", "");
         swapButton.onclick = swapControlDiv;	
 	
         var animationSpeedEntry = document.createElement("div");
 
         animationSpeedEntry.setAttribute("class", "btn-ctrl-group");
         animationSpeedEntry.setAttribute("id", "VisualizationSpeedGroup");
-//        var txtNode = document.createTextNode("Animation Speed"); 
+
         var txtNode = document.createElement("div"); 
         txtNode.setAttribute("style", "float:left");	
         txtNode.innerHTML ="Animation Speed";
-//	bottomLevel.appendChild(txtNode);
+
 	animationSpeedEntry.appendChild(txtNode);
-//	var midLevel = document.createElement("div");
-//        animationSpeedEntry.appendChild(midLevel);
-//	var bottomLevel = document.createElement("div");
-//	midLevel.appendChild(bottomLevel);
-//	animationSpeedEntry.appendChild(bottomLevel);
-        
-        var element = document.createElement("div");
-//	element.setAttribute("display", "inline-block");		
-//	element.setAttribute("style", "float:left");		
+       
+    	var element = document.createElement("div");		
 	animationSpeedEntry.appendChild(element);
-//	bottomLevel.appendChild(element);
-//	bottomLevel.align = "center";
 	
 
         controlBar.appendChild(animationSpeedEntry);
@@ -442,45 +385,18 @@ function initCanvas()
 
 function AnimationManager(objectManager)
 {
-	// Holder for all animated objects.
-	// All animation is done by manipulating objects in\
-	// this container
 	this.animatedObjects = objectManager;
-
-	// Control variables for stopping / starting animation
-	
 	this.animationPaused = false;
 	this.awaitingStep = false;
 	this.currentlyAnimating = false;
-	
-	// Array holding the code for the animation.  This is 
-	// an array of strings, each of which is an animation command
-	// currentAnimation is an index into this array
 	this.AnimationSteps = [];
 	this.currentAnimation = 0;
-	
 	this.previousAnimationSteps = [];
-	
-	// Control variables for where we are in the current animation block.
-	//  currFrame holds the frame number of the current animation block,
-	//  while animationBlockLength holds the length of the current animation
-	//  block (in frame numbers).  
 	this.currFrame = 0;
 	this.animationBlockLength = 0;
-	
-	//  The animation block that is currently running.  Array of singleAnimations
 	this.currentBlock = null;
-	
-	/////////////////////////////////////
-	// Variables for handling undo. 
-	////////////////////////////////////
-	//  A stack of UndoBlock objects (subclassed, UndoBlock is an abstract base class)
-	//  each of which can undo a single animation element
 	this.undoStack = [];
 	this.doingUndo = false;
-	
-	// A stack containing the beginning of each animation block, as an index
-	// into the AnimationSteps array
 	this.undoAnimationStepIndices = [];
 	this.undoAnimationStepIndicesStack = [];
 	
@@ -996,11 +912,6 @@ function AnimationManager(objectManager)
 		}
 		this.currFrame = 0;
 
-		// Hack:  If there are not any animations, and we are currently paused,
-		// then set the current frame to the end of the anumation, so that we will
-		// advance immediagely upon the next step button.  If we are not paused, then
-		// animate as normal.
-
 		if (!anyAnimations && this.animationPaused || (!anyAnimations && this.currentAnimation == this.AnimationSteps.length) )
 		{
 			this.currFrame = this.animationBlockLength;
@@ -1009,8 +920,7 @@ function AnimationManager(objectManager)
 		this.undoStack.push(undoBlock);
 	}
 
-	//  Start a new animation.  The input parameter commands is an array of strings,
-	//  which represents the animation to start
+	//  Start a new animation.
 	this.StartNewAnimation =  function(commands)
 	{
 		clearTimeout(timer);
@@ -1037,19 +947,17 @@ function AnimationManager(objectManager)
 	}
 	
 	
-	// Step backwards one step.  A no-op if the animation is not currently paused
+	// tiến 1 bước (nếu animation bị dừng)
 	this.stepBack = function()
 	{
 		if (this.awaitingStep && this.undoStack != null && this.undoStack.length != 0)
 		{
-			//  TODO:  Get events working correctly!
 			this.fireEvent("AnimationStarted","NoData");
 			clearTimeout(timer);
 
 			this.awaitingStep = false;
 			this.undoLastBlock();
-			// Re-kick thie timer.  The timer may or may not be running at this point,
-			// so to be safe we'll kill it and start it again.
+			// reset time
 			clearTimeout(timer);
 			timer = setTimeout('timeout()', 30); 
 
@@ -1060,15 +968,14 @@ function AnimationManager(objectManager)
 			this.fireEvent("AnimationStarted","NoData");
 			this.currentlyAnimating = true;
 			this.undoLastBlock();
-			// Re-kick thie timer.  The timer may or may not be running at this point,
-			// so to be safe we'll kill it and start it again.
+			// reset time
 			clearTimeout(timer);
 			timer = setTimeout('timeout()', 30); 
 			
 		}
 		
 	}
-	// Step forwards one step.  A no-op if the animation is not currently paused
+	// tiến 1 bước (nếu animation bị dừng)
 	this.step = function()
 	{
 		if (this.awaitingStep)
@@ -1076,15 +983,11 @@ function AnimationManager(objectManager)
 			this.startNextBlock();
 			this.fireEvent("AnimationStarted","NoData");
 			this.currentlyAnimating = true;
-			// Re-kick thie timer.  The timer should be going now, but we've had some difficulty with
-			// it timing itself out, so we'll be safe and kick it now.
+			// reset time.
 			clearTimeout(timer);
 			timer = setTimeout('timeout()', 30); 			
 		}
 	}
-	
-	
-	/// WARNING:  Could be dangerous to call while an animation is running ...
 	this.clearHistory = function()
 	{
 		this.undoStack = [];
@@ -1200,7 +1103,7 @@ function AnimationManager(objectManager)
 		}
 		this.doingUndo = false;
 		
-		// If we are at the final end of the animation ...
+		// Nếu đang ở phần cuối cùng của animation ...
 		if (this.undoAnimationStepIndices.length == 0)
 		{
 			this.awaitingStep = false;
@@ -1234,7 +1137,7 @@ function AnimationManager(objectManager)
 		if (this.undoAnimationStepIndices.length == 0)
 		{
 			
-			// Nothing on the undo stack.  Return
+			// Không có gì trong stack.  Return
 			return;
 			
 		}
@@ -1254,10 +1157,9 @@ function AnimationManager(objectManager)
 			}
 			this.currFrame = 0;
 			
-			// Hack:  If there are not any animations, and we are currently paused,
-			// then set the current frame to the end of the animation, so that we will
-			// advance immediagely upon the next step button.  If we are not paused, then
-			// animate as normal.
+			// Nếu không có bất kỳ animation nào va` đang tạm dừng, 
+			// thì đặt khung hình hiện tại ở cuối animation để chuyển ngay sang nút bước tiếp theo. 
+			// Nếu không bị tạm dừng thì hoạt hình như bình thường.
 			if (!anyAnimations && this.animationPaused  )
 			{
 				this.currFrame = this.animationBlockLength;
@@ -1269,8 +1171,8 @@ function AnimationManager(objectManager)
 	this.setLayer = function(shown, layers)
 	{
 		this.animatedObjects.setLayer(shown, layers)
-		// Drop in an extra draw call here, just in case we are not
-		// in the middle of an update loop when this changes
+		// Call
+		// đề phòng trường hợp không ở giữa vòng cập nhật khi điều này thay đổi
 		this.animatedObjects.draw();
 	}
 	
@@ -1278,8 +1180,8 @@ function AnimationManager(objectManager)
 	this.setAllLayers = function(layers)
 	{
 		this.animatedObjects.setAllLayers(layers);
-		// Drop in an extra draw call here, just in case we are not
-		// in the middle of an update loop when this changes
+		// Call
+		// đề phòng trường hợp không ở giữa vòng cập nhật khi điều này thay đổi
 		this.animatedObjects.draw();
 	}
 	 

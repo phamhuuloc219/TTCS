@@ -1,28 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
 
 function addLabelToAlgorithmBar(labelName)
 {
@@ -35,13 +10,11 @@ function addLabelToAlgorithmBar(labelName)
 	
     var controlBar = document.getElementById("AlgorithmSpecificControls");
 	
-    //Append the element in page (in span).
+    //Nối các element trong trang.
     controlBar.appendChild(tableEntry);
 	return element;
 }
 
-// TODO:  Make this stackable like radio butons
-//        (keep backwards compatible, thought)
 function addCheckboxToAlgorithmBar(boxLabel)
 {	
 	var element = document.createElement("input");
@@ -58,7 +31,7 @@ function addCheckboxToAlgorithmBar(boxLabel)
 	
     var controlBar = document.getElementById("AlgorithmSpecificControls");
 	
-    //Append the element in page (in span).
+    //Nối các element trong trang.
     controlBar.appendChild(tableEntry);
 	return element;
 }
@@ -134,7 +107,7 @@ function addControlToAlgorithmBar(type, name) {
 	
     var controlBar = document.getElementById("AlgorithmSpecificControls");
 	
-    //Append the element in page (in span).
+    //Nối các element trong trang.
     controlBar.appendChild(tableEntry);
 	return element;
 	
@@ -200,8 +173,6 @@ Algorithm.prototype.init = function(am, w, h)
 	this.commands = []
 }
 
-
-// Overload in subclass
 Algorithm.prototype.sizeChanged = function(newWidth, newHeight)
 {
 	
@@ -250,12 +221,12 @@ Algorithm.prototype.randomNumber = function()
 		
 Algorithm.prototype.disableUI = function(event)
 {
-	// to be overridden in base class
+	// ghi đè
 }
 
 Algorithm.prototype.enableUI = function(event)
 {
-	// to be overridden in base class
+	// ghi đè
 }
 Algorithm.prototype.isMobile = function(event)
 {
@@ -291,31 +262,26 @@ Algorithm.prototype.returnSubmitFloat = function(field, funct, maxsize)
 		{
 			keyASCII = event.which
 		} 
-		// Submit on return
+
 		if (keyASCII == 13)
 		{
 			funct();
 		}
-		// Control keys (arrows, del, etc) are always OK
+		
 		else if (controlKey(keyASCII))
 		{
 			return;
 		}
-		// - (minus sign) only OK at beginning of number
-		//  (For now we will allow anywhere -- hard to see where the beginning of the
-		//   number is ...)
-		//else if (keyASCII == 109 && field.value.length  == 0)
 		else if (keyASCII == 109)
 		{
 			return;
 		}
-		// Digis are OK if we have enough space
 		else if ((maxsize != undefined || field.value.length < maxsize) &&
 				 (keyASCII >= 48 && keyASCII <= 57))
 		{
 			return;
 		}
-		// . (Decimal point) is OK if we haven't had one yet, and there is space
+		// . dấu thập phân
 		else if ((maxsize != undefined || field.value.length < maxsize) &&
 				 (keyASCII == 190) && field.value.indexOf(".") == -1)
 				 
@@ -377,27 +343,17 @@ Algorithm.prototype.addReturnSubmit = function(field, action)
 
 Algorithm.prototype.reset = function()
 {
-	// to be overriden in base class
-	// (Throw exception here?)
+
 }
 		
 Algorithm.prototype.undo = function(event)
 {
-	// Remvoe the last action (the one that we are going to undo)
+	// Xóa hành động cuối cùng
 	this.actionHistory.pop();
-	// Clear out our data structure.  Be sure to implement reset in
-	//   every AlgorithmAnimation subclass!
+	// Xóa data stucture.
 	this.reset();
-	//  Redo all actions from the beginning, throwing out the animation
-	//  commands (the animation manager will update the animation on its own).
-	//  Note that if you do something non-deterministic, you might cause problems!
-	//  Be sure if you do anything non-deterministic (that is, calls to a random
-	//  number generator) you clear out the undo stack here and in the animation
-	//  manager.
-	//
-	//  If this seems horribly inefficient -- it is! However, it seems to work well
-	//  in practice, and you get undo for free for all algorithms, which is a non-trivial
-	//  gain.
+	// Làm lại tất cả các hành động từ đầu, bỏ animation
+	// các lệnh (trình quản lý animation sẽ tự cập nhật animation).
 	var len = this.actionHistory.length;
 	this.recordAnimation = false;
 	for (var i = 0; i < len; i++)
