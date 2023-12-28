@@ -221,12 +221,12 @@ Algorithm.prototype.randomNumber = function()
 		
 Algorithm.prototype.disableUI = function(event)
 {
-	// ghi đè
+	// 
 }
 
 Algorithm.prototype.enableUI = function(event)
 {
-	// ghi đè
+	// 
 }
 Algorithm.prototype.isMobile = function(event)
 {
