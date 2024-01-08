@@ -2,14 +2,10 @@
 function addLabelToAlgorithmBar(labelName)
 {
     var element = document.createTextNode(labelName);
-	
 	var tableEntry = document.createElement("div");	
         tableEntry.setAttribute("class", "top-btn-group");
 	tableEntry.appendChild(element);
-	
-	
     var controlBar = document.getElementById("AlgorithmSpecificControls");
-	
     //Nối các element trong trang.
     controlBar.appendChild(tableEntry);
 	return element;
@@ -18,19 +14,14 @@ function addLabelToAlgorithmBar(labelName)
 function addCheckboxToAlgorithmBar(boxLabel)
 {	
 	var element = document.createElement("input");
-
     element.setAttribute("type", "checkbox");
     element.setAttribute("value", boxLabel);
-	
     var label = document.createTextNode(boxLabel);
-	
 	var tableEntry = document.createElement("div");	
         tableEntry.setAttribute("class", "top-btn-group");
 	tableEntry.appendChild(element);
 	tableEntry.appendChild(label);
-	
     var controlBar = document.getElementById("AlgorithmSpecificControls");
-	
     //Nối các element trong trang.
     controlBar.appendChild(tableEntry);
 	return element;
@@ -39,13 +30,11 @@ function addCheckboxToAlgorithmBar(boxLabel)
 function addRadioButtonGroupToAlgorithmBar(buttonNames, groupName)
 {
 	var buttonList = [];
-	var newTable = document.createElement("table");
-		
+	var newTable = document.createElement("table");	
 	for (var i = 0; i < buttonNames.length; i++)
 	{
 		var midLevel = document.createElement("tr");
 		var bottomLevel = document.createElement("td");
-		
 		var button = document.createElement("input");
 		button.setAttribute("type", "radio");
 		button.setAttribute("name", groupName);
@@ -57,11 +46,10 @@ function addRadioButtonGroupToAlgorithmBar(buttonNames, groupName)
 		newTable.appendChild(midLevel);	
 		buttonList.push(button);
 	}
-	
 	var topLevelTableEntry = document.createElement("div");
         topLevelTableEntry.setAttribute("class", "top-btn-group");
 	topLevelTableEntry.appendChild(newTable);
-	
+
 	var controlBar = document.getElementById("AlgorithmSpecificControls");
 	controlBar.appendChild(topLevelTableEntry);
 	
@@ -118,11 +106,7 @@ function addControlToAlgorithmBar(type, name) {
 
 function Algorithm(am)
 {
-	
 }
-
-
-
 Algorithm.prototype.setCodeAlpha = function(code, newAlpha)
 {
    var i,j;

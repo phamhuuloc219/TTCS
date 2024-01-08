@@ -1,6 +1,4 @@
 @charset "utf-8";
-
-
 body {
 	font: 100% Verdana, Arial, Helvetica, sans-serif;
 	margin: 0;
@@ -8,72 +6,50 @@ body {
 	text-align: center;
 	color: #000000;
 }
-
-
-
-
 .VisualizationMainPage #mainContent {
 	background: #FFFFFF;
         overflow-x: hidden;
 }
-
-
-
 .VisualizationMainPage #container {
-
-
 	background: #FFFFFF;
 	text-align: left;
 }
-
-
 .VisualizationMainPage #algoControlSection
 {
 	background: #bfeaa5; 
 	color:#000000; 
-
 }
-
-
 .VisualizationMainPage #generalAnimationControlSection
 {
 	background: #ffffff; 
 	color:#000000; 
-
 }
-
 .VisualizationMainPage  #header { 
 	background: #000000; 
 	color:#ffffff;
 	padding: 0 10px 0 20px; 
-  
 }    
 .VisualizationMainPage #header h1 {
 	margin: 0; 
 	padding: 10px 0; 
-        font-size: 20px
+    font-size: 20px
 	}
 .VisualizationMainPage #container {
 	background: #FFFFFF;
 	margin: 0 auto;
 	text-align: left;
 }	
-	
 .VisualizationMainPage #mainContent {
 	text-align: center;
 }	
-	
-
 .VisualizationMainPage #mainContent h1{
 	background: #FFFFFF;
 	color:#000000
 }
-
 .VisualizationMainPage #mainContent h2{
 	background: #FFFFFF;
 	color:#000000
 }
-
 .VisualizationMainPage #mainContent h3{
 	background: #FFFFFF;
 	color:#000000
@@ -85,14 +61,10 @@ body {
 .VisualizationMainPage #footer p {
 	margin: 0; 	padding: 10px 0; 
 }
-
 EM {text-decoration: bold;}
-
 img {
    max-width: 100%;
 }
-
-	
 .top-btn-group{
     float: left;
     margin: 2px;

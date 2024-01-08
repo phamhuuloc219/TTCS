@@ -1,30 +1,21 @@
 var timer;
 var swapped = false;
-
-
 function reorderSibling(node1, node2) 
 {
     node1.parentNode.replaceChild(node1, node2);
     node1.parentNode.insertBefore(node2, node1); 
 }
-
-
 function swapControlDiv()
 {
     swapped = !swapped;
     if (swapped) {
 	reorderSibling(document.getElementById('canvas'), document.getElementById('generalAnimationControlSection'));
         setCookie("VisualizationControlSwapped", "true", 30);
-
     } else {
 	reorderSibling(document.getElementById('generalAnimationControlSection'), document.getElementById('canvas'));
         setCookie("VisualizationControlSwapped", "false", 30);
-
     }
 }
-
-
-// read a cookie
 function getCookie(cookieName)
 {
 	var i, x, y;
@@ -40,8 +31,6 @@ function getCookie(cookieName)
 		}
 	}
 }
-
-// write a cookie
 function setCookie(cookieName,value,expireDays)
 {
 	var exdate=new Date();
@@ -52,29 +41,20 @@ function setCookie(cookieName,value,expireDays)
 
 
 var ANIMATION_SPEED_DEFAULT = 50;
-
-
-// TODO:  Move these out of global space into animation manager?
 var objectManager;
 var animationManager;
 var canvas;
-
 var paused = false;
 var playPauseBackButton;
 var skipBackButton;
 var stepBackButton;
 var stepForwardButton;
 var skipForwardButton;
-
 var widthEntry;
 var heightEntry;
 var sizeButton;
-
-
-
 function returnSubmit(field, funct, maxsize, intOnly)
-{
-    
+{  
 	if (maxsize != undefined)
 	{
 		field.size = maxsize;
@@ -107,10 +87,8 @@ function returnSubmit(field, funct, maxsize, intOnly)
 			if (!controlKey(keyASCII))
 				return false;
 		}
-	    return true;
-		
+	    return true;	
 	}
-	
 }
 
 
@@ -124,7 +102,6 @@ function animWaiting()
 	objectManager.statusReport.setText("");
 	objectManager.statusReport.setForegroundColor("#FF0000");
 }
-
 function animStarted()
 {
 	skipForwardButton.disabled = false;
@@ -134,7 +111,6 @@ function animStarted()
 	objectManager.statusReport.setText("");
 	objectManager.statusReport.setForegroundColor("#009900");
 }
-
 function animEnded()
 {
 	skipForwardButton.disabled = true;
@@ -146,16 +122,11 @@ function animEnded()
 	objectManager.statusReport.setText("");
 	objectManager.statusReport.setForegroundColor("#000000");
 }
-
-
-
 function anumUndoUnavailable()
 {
 	skipBackButton.disabled = true;
 	stepBackButton.disabled = true;
 }
-
-
 function timeout()
 {
 	// set the timeout *first*
@@ -164,26 +135,18 @@ function timeout()
 	objectManager.draw();	
         
 }
-
-
 function doStep()
 {
 	animationManager.step();
 }
-
-
 function doSkip()
 {
 	animationManager.skipForward();
 }
-
-
 function doSkipBack()
 {
 	animationManager.skipBack();
 }
-
-
 function doStepBack()
 {
 	animationManager.stepBack();
@@ -198,7 +161,6 @@ function doPlayPause()
 		{
 			stepBackButton.disabled = false;		
 		}
-		
 	}
 	else
 	{
@@ -206,8 +168,6 @@ function doPlayPause()
 	}
 	animationManager.SetPaused(paused);
 }
-
-
 function addControl(type, name, location) {
 	
     var element = document.createElement("input");
@@ -262,7 +222,6 @@ function initCanvas()
         canvas.width  = window.innerWidth;
 	objectManager = new ObjectManager();
 	animationManager = new AnimationManager(objectManager);
-	
 	skipBackButton = addControlToAnimationBar("Button", "");
 	skipBackButton.onclick = animationManager.skipBack.bind(animationManager);
 	stepBackButton = addControlToAnimationBar("Button", "");
@@ -273,14 +232,7 @@ function initCanvas()
 	stepForwardButton.onclick = animationManager.step.bind(animationManager) ;
 	skipForwardButton = addControlToAnimationBar("Button", "");
 	skipForwardButton.onclick = animationManager.skipForward.bind(animationManager);
-	
-	
-        
-	
         var controlBar = document.getElementById("GeneralAnimationControls");
-
-
-
 	var width=getCookie("VisualizationWidth");
 	if (width == null || width == "")
 	{
@@ -306,44 +258,26 @@ function initCanvas()
         {
 	    reorderSibling(document.getElementById('canvas'), document.getElementById('generalAnimationControlSection'));
 	}
-
 	canvas.width = width;
 	canvas.height = height;
-	
-	
-	
 	var groupWidthHeightEntry = document.createElement("div");
-        controlBar.appendChild(groupWidthHeightEntry);
-        
-        groupWidthHeightEntry.setAttribute("class", "btn-ctrl-group");
-        groupWidthHeightEntry.setAttribute("id", "GroupWidthHeight");
-
-	sizeButton = addControlToAnimationBar("Button", "");
-	
+    controlBar.appendChild(groupWidthHeightEntry);      
+    groupWidthHeightEntry.setAttribute("class", "btn-ctrl-group");
+    groupWidthHeightEntry.setAttribute("id", "GroupWidthHeight");
+	sizeButton = addControlToAnimationBar("Button", "");	
 	sizeButton.onclick = animationManager.changeSize.bind(animationManager) ;
-	
-
-        swapButton = addControlToAnimationBar("Button", "");
-        swapButton.onclick = swapControlDiv;	
-	
-        var animationSpeedEntry = document.createElement("div");
-
-        animationSpeedEntry.setAttribute("class", "btn-ctrl-group");
-        animationSpeedEntry.setAttribute("id", "VisualizationSpeedGroup");
-
-        var txtNode = document.createElement("div"); 
-        txtNode.setAttribute("style", "float:left");	
-        txtNode.innerHTML ="Animation Speed";
-
+    swapButton = addControlToAnimationBar("Button", "");
+    swapButton.onclick = swapControlDiv;	
+    var animationSpeedEntry = document.createElement("div");
+    animationSpeedEntry.setAttribute("class", "btn-ctrl-group");
+    animationSpeedEntry.setAttribute("id", "VisualizationSpeedGroup");
+    var txtNode = document.createElement("div"); 
+    txtNode.setAttribute("style", "float:left");	
+    txtNode.innerHTML ="Animation Speed";
 	animationSpeedEntry.appendChild(txtNode);
-       
-    	var element = document.createElement("div");		
+ 	var element = document.createElement("div");		
 	animationSpeedEntry.appendChild(element);
-	
-
-        controlBar.appendChild(animationSpeedEntry);
-	
-    
+	controlBar.appendChild(animationSpeedEntry);
 	var speed = getCookie("VisualizationSpeed");
 	if (speed == null || speed == "")
 	{
